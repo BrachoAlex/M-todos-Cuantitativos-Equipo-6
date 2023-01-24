@@ -68,8 +68,12 @@ def cashier_simulator(number_of_clients, maximum_time_client, maximum_time_opera
         index += 1
         number_of_clients -= 1
 
+    average_wait = wait_client_total / client_number
+    wait_probability = (total_client_waited / client_number) * 100
+    total_simulation_time = (client_arrival_time - original_services_start).total_seconds() / 60
+    inactive_percentage = (inactivity_cashier_total/total_simulation_time) * 100
     # ANNEXING TOTALS
-    df.loc[index] = ["TOTAL:", "", "", operations_time_total, "", "", wait_client_total, inactivity_cashier_total]
+    df.loc[index] = ["TOTAL:", "", str(total_simulation_time) + " min", operations_time_total, "", "", wait_client_total, inactivity_cashier_total]
     # DATAFRAME FORMAT
     pdtabulate = lambda df: tabulate(df, headers='keys', tablefmt='psql', showindex=False)
     print(pdtabulate(df))
@@ -78,10 +82,7 @@ def cashier_simulator(number_of_clients, maximum_time_client, maximum_time_opera
     df.to_excel(writer, 'DataFrame')
     writer.save()
     # NOTE: IGNORE SAVE ERROR
-    average_wait = wait_client_total / client_number
-    wait_probability = (total_client_waited / client_number) * 100
-    total_simulation_time = (client_arrival_time - original_services_start).total_seconds() / 60
-    inactive_percentage = (inactivity_cashier_total/total_simulation_time) * 100
+
 
     print("Tiempo de espera promedio por cliente: " + str(round(average_wait,2)) + " minutos de espera para ser atendidos")
     print("Probabilidad de que un cliente espere en la fila: " + str(round(wait_probability,2)) + "%")
