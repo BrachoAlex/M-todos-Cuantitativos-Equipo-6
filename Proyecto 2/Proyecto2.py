@@ -90,7 +90,7 @@ def cashier_simulator(number_of_clients, maximum_time_client, maximum_time_opera
         round(average_wait, 2)) + " minutos de espera para ser atendidos")
     print("Probabilidad de que un cliente espere en la fila: " + str(round(wait_probability, 2)) + "%")
     print("Porcentaje de tiempo en que el ATM estuvo inactivo: " + str(round(inactive_percentage, 2)) + "%")
-    print("Tiempo promedio de servicio: " + str(round(average_wait_for_service)) + " minutos de realizar el trámite")
+    print("Tiempo promedio de servicio: " + str(round(average_wait_for_service, 2)) + " minutos de realizar el trámite")
 
 
-cashier_simulator(10, 10, 4)
+cashier_simulator(20, 35, 35)
